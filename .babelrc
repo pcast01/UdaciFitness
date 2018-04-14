@@ -1,0 +1,9 @@
+{
+  "presets": ["babel-preset-expo"],
+  "env": {
+    "development": {
+      "plugins": ["transform-react-jsx-source"]
+    },
+    "REACT_NATIVE_PACKAGER_HOSTNAME": "192.168.1.2"
+  }
+}
