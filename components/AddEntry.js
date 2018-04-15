@@ -1,8 +1,19 @@
 import React, { Component } from "react";
-import { View } from "react-native";
-import { getMetricMetaInfo } from "../utils/helpers";
+import { View, TouchableOpacity, Text } from "react-native";
+import { getMetricMetaInfo, timeToString } from "../utils/helpers";
 import UdaciSlider from "./UdaciSliders";
 import UdaciSteppers from "./UdaciSteppers";
+import DateHeader from "./DateHeader";
+import { Ionicons } from "@expo/vector-icons";
+import TextButton from "./TextButton";
+
+function SubmitBtn({ onPress }) {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Text>SUBMIT</Text>
+    </TouchableOpacity>
+  );
+}
 
 export default class AddEntry extends Component {
   state = {
@@ -10,10 +21,10 @@ export default class AddEntry extends Component {
     bike: 0,
     swim: 0,
     sleep: 0,
-    eat: 0
+    eat: 5
   };
   increment = metric => {
-    const { max, step } = getMetricMegaInfo(metric);
+    const { max, step } = getMetricMetaInfo(metric);
 
     this.setState(state => {
       const count = state[metric] + step;
@@ -39,11 +50,50 @@ export default class AddEntry extends Component {
       [metric]: value
     }));
   };
+  submit = () => {
+    const key = timeToString();
+    const entry = this.state;
+
+    // Update redux
+    this.setState(() => ({
+      run: 0,
+      bike: 0,
+      swim: 0,
+      sleep: 0,
+      eat: 0
+    }));
+
+    // Navigate to home
+
+    // SAve to DB
+
+    // Clear local notification
+  };
+  reset = () => {
+    const key = timeToString();
+
+    // Update to Redux
+
+    // Route to Home
+
+    // Update "DB"
+  };
   render() {
     const metaInfo = getMetricMetaInfo();
 
+    if (this.props.alreadyLogged) {
+      return (
+        <View>
+          <Ionicons name="ios-happy-outline" size={100} />
+          <Text>You already logged your information for the day!</Text>
+          <TextButton onpress={this.reset}>Reset</TextButton>
+        </View>
+      );
+    }
     return (
       <View>
+        <DateHeader date={new Date().toLocaleDateString()} />
+        <Text>{JSON.stringify(this.state)}</Text>
         {Object.keys(metaInfo).map(key => {
           const { getIcon, type, ...rest } = metaInfo[key];
           const value = this.state[key];
@@ -68,6 +118,7 @@ export default class AddEntry extends Component {
             </View>
           );
         })}
+        <SubmitBtn onPress={this.submit} />
       </View>
     );
   }

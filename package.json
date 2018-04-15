@@ -21,9 +21,11 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "eslint": "^4.19.1",
     "exp": "^50.0.5",
     "expo": "^25.0.0",
     "react": "16.2.0",
+    "react-devtools": "^3.2.1",
     "react-native": "0.52.0"
   }
 }
