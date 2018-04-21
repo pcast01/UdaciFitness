@@ -10,6 +10,7 @@
     "eslint-plugin-react": "^7.7.0",
     "jest-expo": "25.0.0",
     "prettier": "^1.11.1",
+    "react-native-debugger-open": "^0.3.17",
     "react-native-scripts": "1.11.1",
     "react-test-renderer": "16.2.0"
   },
@@ -19,7 +20,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js"
+    "test": "node node_modules/jest/bin/jest.js",
+    "postinstall": "rndebugger-open --expo"
   },
   "jest": {
     "preset": "jest-expo"
@@ -33,6 +35,7 @@
     "react-devtools": "^3.2.1",
     "react-native": "0.52.0",
     "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "udacifitness-calendar": "^11.0.0"
   }
 }

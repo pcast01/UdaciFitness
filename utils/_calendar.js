@@ -1,18 +1,20 @@
 // utils/_calendar.js
 
-import { AsyncStorage } from "react-native";
-import { getMetricMetaInfo, timeToString } from "./helpers";
+import { AsyncStorage } from 'react-native';
+import { getMetricMetaInfo, timeToString } from './helpers';
 
-export const CALENDAR_STORAGE_KEY = "UdaciFitness:calendar";
+export const CALENDAR_STORAGE_KEY = 'UdaciFitness:calendar';
 
 function getRandomNumber(max) {
   return Math.floor(Math.random() * max) + 0;
 }
 
 function setDummyData() {
-  const { run, bike, swim, sleep, eat } = getMetricMetaInfo();
+  const {
+    run, bike, swim, sleep, eat,
+  } = getMetricMetaInfo();
 
-  let dummyData = {};
+  const dummyData = {};
   const timestamp = Date.now();
 
   for (let i = -183; i < 0; i++) {
@@ -21,12 +23,12 @@ function setDummyData() {
     dummyData[strTime] =
       getRandomNumber(3) % 2 === 0
         ? {
-            run: getRandomNumber(run.max),
-            bike: getRandomNumber(bike.max),
-            swim: getRandomNumber(swim.max),
-            sleep: getRandomNumber(sleep.max),
-            eat: getRandomNumber(eat.max)
-          }
+          run: getRandomNumber(run.max),
+          bike: getRandomNumber(bike.max),
+          swim: getRandomNumber(swim.max),
+          sleep: getRandomNumber(sleep.max),
+          eat: getRandomNumber(eat.max),
+        }
         : null;
   }
 
@@ -43,7 +45,7 @@ function setMissingDates(dates) {
     const time = timestamp + i * 24 * 60 * 60 * 1000;
     const strTime = timeToString(time);
 
-    if (typeof dates[strTime] === "undefined") {
+    if (typeof dates[strTime] === 'undefined') {
       dates[strTime] = null;
     }
   }
@@ -52,7 +54,5 @@ function setMissingDates(dates) {
 }
 
 export function formatCalendarResults(results) {
-  return results === null
-    ? setDummyData()
-    : setMissingDates(JSON.parse(results));
+  return results === null ? setDummyData() : setMissingDates(JSON.parse(results));
 }

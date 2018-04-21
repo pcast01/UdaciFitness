@@ -143,7 +143,7 @@ class AddEntry extends Component {
         <View style={styles.center}>
           <Ionicons name={Platform.OS === 'ios' ? 'ios-happy-outline' : 'md-happy'} size={100} />
           <Text>You already logged your information for the day!</Text>
-          <TextButton style={{ padding: 10 }} onpress={this.reset}>
+          <TextButton style={{ padding: 10 }} onPress={this.reset}>
             Reset
           </TextButton>
         </View>
